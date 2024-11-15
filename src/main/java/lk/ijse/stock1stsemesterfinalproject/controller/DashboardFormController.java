@@ -35,9 +35,6 @@ public class DashboardFormController implements Initializable {
     private Label lbl;
 
     @FXML
-    private JFXButton orderdetailbtn;
-
-    @FXML
     private JFXButton ordersbtn;
 
     @FXML
@@ -111,12 +108,6 @@ public class DashboardFormController implements Initializable {
     }
 
     @FXML
-    void orderdetailbtnOnAction(ActionEvent event) {
-        navigateTo("/view/orderItemDetailForm.fxml");
-
-    }
-
-    @FXML
     void ordersbtnOnAction(ActionEvent event) {
         navigateTo("/view/ordersForm.fxml");
 
@@ -157,5 +148,4 @@ public class DashboardFormController implements Initializable {
         navigateTo("/view/supplierForm.fxml");
 
     }
-
 }

@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 
 public class OrderDTO {
-
     private String Order_Id;
     private String Description;
     private Integer Order_qty;
