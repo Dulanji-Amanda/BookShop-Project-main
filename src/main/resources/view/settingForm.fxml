@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="settingap" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.SettingController">
+   <children>
+      <HBox layoutX="79.0" layoutY="246.0" prefHeight="38.0" prefWidth="379.0">
+         <children>
+            <Label fx:id="lnamelbl" prefHeight="45.0" prefWidth="99.0" text="Last Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="lnametxt" prefHeight="36.0" prefWidth="264.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
+         </children>
+      </HBox>
+      <HBox layoutX="79.0" layoutY="175.0" prefHeight="38.0" prefWidth="379.0">
+         <children>
+            <Label fx:id="fnamelbl" prefHeight="38.0" prefWidth="102.0" text="First Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="fnametxt" prefHeight="36.0" prefWidth="264.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
+         </children>
+      </HBox>
+      <ImageView fx:id="iconimg" fitHeight="85.0" fitWidth="79.0" layoutX="858.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/FontLogo.png" />
+         </image>
+      </ImageView>
+      <HBox layoutX="79.0" layoutY="85.0" prefHeight="47.0" prefWidth="267.0">
+         <children>
+            <Label fx:id="useridlbl" prefHeight="47.0" prefWidth="86.0" text="User Id">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cmbuserid" onAction="#cmbuseridOnAction" prefHeight="37.0" prefWidth="162.0" promptText="Select User Id" />
+         </children>
+      </HBox>
+      <Button fx:id="resetbtn" layoutX="119.0" layoutY="626.0" mnemonicParsing="false" onAction="#resetbtnOnAction" prefHeight="34.0" prefWidth="316.0" style="-fx-background-color: Skyblue;" text="Reset">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="savebtn" layoutX="575.0" layoutY="622.0" mnemonicParsing="false" onAction="#savebtnOnAction" prefHeight="34.0" prefWidth="315.0" style="-fx-background-color: #51f06b;" text="Save">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <HBox layoutX="79.0" layoutY="323.0" prefHeight="38.0" prefWidth="379.0">
+         <children>
+            <Label fx:id="unamelbl" prefHeight="45.0" prefWidth="99.0" text="User Name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="unametxt" prefHeight="36.0" prefWidth="264.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
+         </children>
+      </HBox>
+      <HBox layoutX="79.0" layoutY="399.0" prefHeight="38.0" prefWidth="489.0">
+         <children>
+            <Label fx:id="emaillbl" prefHeight="45.0" prefWidth="99.0" text="Email">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailtxt" prefHeight="36.0" prefWidth="383.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
+         </children>
+      </HBox>
+      <HBox layoutX="79.0" layoutY="470.0" prefHeight="38.0" prefWidth="379.0">
+         <children>
+            <Label fx:id="passwordlbl" prefHeight="45.0" prefWidth="99.0" text="Password">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="passwordtxt" prefHeight="36.0" prefWidth="264.0" style="-fx-border-color: #091057; -fx-background-color: transparent; -fx-border-width: 0px 0px 2px;" />
+         </children>
+      </HBox>
+      <ImageView fx:id="imgpic" fitHeight="524.0" fitWidth="448.0" layoutX="541.0" layoutY="109.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/rb_53913.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

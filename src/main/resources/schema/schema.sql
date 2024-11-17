@@ -1,3 +1,5 @@
+drop database bookshop;
+
 create database IF NOT EXISTS bookshop;
 
 use bookshop;
@@ -85,10 +87,7 @@ CREATE TABLE item(
                      Item_Id VARCHAR(10) primary key,
                      Item_Name VARCHAR (50),
                      Qty INT (10),
-                     Price DECIMAL (10,2),
-                     Order_Id VARCHAR (10),
-                     FOREIGN KEY(Order_Id) REFERENCES orders(Order_Id)
-                         ON UPDATE CASCADE ON DELETE CASCADE
+                     Price DECIMAL (10,2)
 );
 
 

@@ -13,5 +13,4 @@ public class ItemDTO {
     private String Item_Name;
     private Integer Qty;
     private Double Price;
-    private String Order_Id;
 }

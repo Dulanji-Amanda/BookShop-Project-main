@@ -232,10 +232,10 @@ public class EmployeeFormController implements Initializable {
             boolean isSaved = employeeModel.updateEmployee(employeeDTO);
 
             if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Employee saved...!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Employee updated...!").show();
                 refreshPage();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save employee...!").show();
+                new Alert(Alert.AlertType.ERROR, "Fail to update employee...!").show();
             }
         }
     }

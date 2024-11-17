@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.RegisterSecondFormController">
+<AnchorPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.RegisterSecondFormController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" layoutX="20.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -65,9 +65,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ImageView fitHeight="539.0" fitWidth="528.0" layoutX="678.0" layoutY="113.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="571.0" fitWidth="545.0" layoutX="678.0" layoutY="113.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/img/Leonardo_Phoenix_a_poignant_and_dreamlike_cinematic_photograph_3-removebg-preview.png" />
+            <Image url="@../assets/img/download__3_-removebg-preview.png" />
          </image>
       </ImageView>
       <PasswordField fx:id="txtPassword" layoutX="150.0" layoutY="418.0" prefHeight="46.0" prefWidth="389.0" stylesheets="@../style/Styles.css">

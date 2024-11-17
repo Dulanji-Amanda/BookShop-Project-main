@@ -34,9 +34,9 @@
                   <Font name="System Bold" size="47.0" />
                </font>
             </Label>
-            <ImageView fitHeight="462.0" fitWidth="462.0" layoutX="712.0" layoutY="129.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="589.0" fitWidth="596.0" layoutX="569.0" layoutY="78.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../assets/img/girl.png" />
+                  <Image url="@../assets/img/download.png" />
                </image>
             </ImageView>
             <Label layoutX="79.0" layoutY="284.0" opacity="0.8" style="-fx-text-fill: #2B2B2B;" text="Don’t have an account?">

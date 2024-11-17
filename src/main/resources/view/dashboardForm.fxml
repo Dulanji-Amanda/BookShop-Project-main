@@ -7,6 +7,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.RadialGradient?>
@@ -74,14 +75,6 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="orderdetailbtn" layoutX="10.0" layoutY="165.0" onAction="#orderdetailbtnOnAction" prefHeight="36.0" prefWidth="250.0" text="Order Item Details" textFill="#640a72">
-                     <VBox.margin>
-                        <Insets top="15.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="System Bold" size="18.0" />
-                     </font>
-                  </JFXButton>
                   <JFXButton fx:id="ordersbtn" layoutX="10.0" layoutY="201.0" onAction="#ordersbtnOnAction" prefHeight="36.0" prefWidth="250.0" text="Orders" textFill="#640a72">
                      <VBox.margin>
                         <Insets top="15.0" />
@@ -138,6 +131,26 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </JFXButton>
+                  <HBox prefHeight="78.0" prefWidth="250.0">
+                     <children>
+                        <ImageView fx:id="settingId" fitHeight="42.0" fitWidth="50.0" onMouseClicked="#settingOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="15.0" top="15.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../assets/img/setting.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="homeId" fitHeight="40.0" fitWidth="38.0" layoutX="25.0" layoutY="25.0" onMouseClicked="#HomeOnMouseClicked" pickOnBounds="true" preserveRatio="true">
+                           <HBox.margin>
+                              <Insets left="140.0" top="15.0" />
+                           </HBox.margin>
+                           <image>
+                              <Image url="@../assets/img/home.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>

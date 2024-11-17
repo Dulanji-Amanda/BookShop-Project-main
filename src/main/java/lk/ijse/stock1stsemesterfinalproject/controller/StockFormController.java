@@ -206,10 +206,10 @@ public class StockFormController implements Initializable {
             boolean isSaved = stockModel.updateStock(stockDTO);
 
             if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Stock saved...!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Stock updated...!").show();
                 refreshPage();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save stock...!").show();
+                new Alert(Alert.AlertType.ERROR, "Fail to update stock...!").show();
             }
         }
     }

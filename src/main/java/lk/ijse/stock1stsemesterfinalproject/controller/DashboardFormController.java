@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -18,6 +19,13 @@ import java.util.ResourceBundle;
 public class DashboardFormController implements Initializable {
     @FXML
     private AnchorPane ap;
+
+    @FXML
+    private ImageView homeId;
+
+    @FXML
+    private ImageView settingId;
+
 
     @FXML
     private JFXButton customerbtn;
@@ -33,9 +41,6 @@ public class DashboardFormController implements Initializable {
 
     @FXML
     private Label lbl;
-
-    @FXML
-    private JFXButton orderdetailbtn;
 
     @FXML
     private JFXButton ordersbtn;
@@ -70,9 +75,11 @@ public class DashboardFormController implements Initializable {
     @FXML
     private VBox vb2;
 
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        navigateTo("/view/customerForm.fxml");
+        navigateTo("/view/welcomeShop.fxml");
     }
 
     public void navigateTo(String fxmlPath) {
@@ -107,12 +114,6 @@ public class DashboardFormController implements Initializable {
     @FXML
     void itembtnOnAction(ActionEvent event) {
         navigateTo("/view/itemForm.fxml");
-
-    }
-
-    @FXML
-    void orderdetailbtnOnAction(ActionEvent event) {
-        navigateTo("/view/orderItemDetailForm.fxml");
 
     }
 
@@ -155,6 +156,17 @@ public class DashboardFormController implements Initializable {
     @FXML
     void supplierbtnOnAction(ActionEvent event) {
         navigateTo("/view/supplierForm.fxml");
+
+    }
+    @FXML
+    void HomeOnMouseClicked(MouseEvent event) {
+        navigateTo("/view/welcomeShop.fxml");
+
+    }
+
+    @FXML
+    void settingOnMouseClicked(MouseEvent event) {
+        navigateTo("/view/settingForm.fxml");
 
     }
 

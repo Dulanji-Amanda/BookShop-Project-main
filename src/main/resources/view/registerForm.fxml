@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.RegisterFormController">
+<AnchorPane fx:id="rootPane" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.RegisterFormController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1366.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <image>
@@ -74,9 +74,9 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <ImageView fx:id="img" fitHeight="528.0" fitWidth="528.0" layoutX="719.0" layoutY="122.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="img" fitHeight="531.0" fitWidth="563.0" layoutX="682.0" layoutY="110.0" opacity="0.9" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/img/remove bg.png" />
+            <Image url="@../assets/img/download__2_-removebg-preview.png" />
          </image>
       </ImageView>
       <Label fx:id="lblError" layoutX="141.0" layoutY="555.0" prefHeight="18.0" prefWidth="511.0" />

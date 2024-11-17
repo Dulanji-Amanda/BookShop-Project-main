@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="Apane" prefHeight="700.0" prefWidth="1017.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.WelcomeShopController">
+   <children>
+      <ImageView fitHeight="640.0" fitWidth="680.0" layoutX="166.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/D.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbl" layoutX="392.0" layoutY="192.0" prefHeight="28.0" prefWidth="277.0" text="Stock Verse">
+         <font>
+            <Font name="Bell MT Bold" size="36.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="txtimg" fitHeight="355.0" fitWidth="331.0" layoutX="333.0" layoutY="243.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/img/text.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="logoutbtn" layoutX="832.0" layoutY="625.0" mnemonicParsing="false" onAction="#logoutbtnOnAction" prefHeight="53.0" prefWidth="161.0" style="-fx-background-color: #CB9DF0; -fx-background-radius: 30;" text="Log Out">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

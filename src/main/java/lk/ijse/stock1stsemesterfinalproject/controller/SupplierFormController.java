@@ -108,7 +108,7 @@ public class SupplierFormController implements Initializable {
 
         btnSSupplier.setDisable(false);
         btnDSupplier.setDisable(true);
-        btnRSupplier.setDisable(true);
+        btnUSupplier.setDisable(true);
     }
 
     private void refreshTable() throws SQLException {
@@ -233,10 +233,10 @@ public class SupplierFormController implements Initializable {
             boolean isSaved = supplierModel.updateSupplier(supplierDTO);
 
             if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Supplier saved...!").show();
+                new Alert(Alert.AlertType.INFORMATION, "Supplier updated...!").show();
                 refreshPage();
             } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save supplier...!").show();
+                new Alert(Alert.AlertType.ERROR, "Fail to update supplier...!").show();
             }
         }
     }
@@ -252,7 +252,7 @@ public class SupplierFormController implements Initializable {
 
             btnSSupplier.setDisable(true);
             btnDSupplier.setDisable(false);
-            btnRSupplier.setDisable(false);
+            btnUSupplier.setDisable(false);
         }
     }
     private void loadUserIds() throws SQLException {
