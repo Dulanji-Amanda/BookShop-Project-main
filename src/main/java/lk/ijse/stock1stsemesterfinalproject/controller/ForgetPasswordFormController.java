@@ -15,6 +15,7 @@ import javafx.util.Duration;
 import lk.ijse.stock1stsemesterfinalproject.model.UserModel;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.sql.SQLException;
 import java.util.Objects;
 
@@ -42,10 +43,14 @@ public class ForgetPasswordFormController {
 
     private UserModel userModel = new UserModel();
 
+    SendMailController sendMailController = new SendMailController();
+
     @FXML
     public void initialize() {
         txtEmail.requestFocus();
     }
+
+    public static String otpGenerated = "0000";
 
     @FXML
     void btnSubmitOnAction(ActionEvent event) throws SQLException {
@@ -55,9 +60,23 @@ public class ForgetPasswordFormController {
             showErrorMessage("*Invalid email address");
         } else {
             emailAddress = txtEmail.getText();
+
+            String recipientEmail = emailAddress; // Replace with the recipient's email
+            String otp = generateOTP();
+            otpGenerated = generateOTP();// Generate OTP
+            //System.out.println("Generated OTP: " + otp);
+            sendMailController.sendEmail(recipientEmail, otpGenerated);
+
             loadUI("/view/otpForm.fxml");
         }
     }
+
+    public static String generateOTP() {
+        SecureRandom random = new SecureRandom();
+        int otp = 1000 + random.nextInt(9000); // Generates a 4-digit OTP
+        return String.valueOf(otp);
+    }
+
 
     private boolean isValidEmailAddress() throws SQLException {
         return userModel.isEmailExists(txtEmail.getText());

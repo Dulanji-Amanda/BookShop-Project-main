@@ -56,7 +56,7 @@ public class OtpVerifiedFormController {
     @FXML
     private TextField txtPasswordVisible;
 
-    private static final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$";
+    //private static final String PASSWORD_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.[A-Z])(?=.[@#$%^&+=]).{8,}$";
 
     private UserModel userModel = new UserModel();
 
@@ -73,9 +73,9 @@ public class OtpVerifiedFormController {
     void btnResetOnAction(ActionEvent event) throws SQLException {
         if (areFieldsEmpty()) {
             showErrorMessage("*Required fields cannot be empty.");
-        } else if (!isValidPassword(txtPassword.getText())) {
+        } /*else if (!isValidPassword(txtPassword.getText())) {
             showErrorMessage("*Password must be at least 8 characters long, contain a digit, a lowercase letter, an uppercase letter, and a special character.");
-        } else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
+        }*/ else if (!txtPassword.getText().equals(txtConfirmPassword.getText())) {
             showErrorMessage("*Passwords do not match.");
         } else {
             if (updateUser()) {
@@ -126,9 +126,9 @@ public class OtpVerifiedFormController {
         return false;
     }
 
-    private boolean isValidPassword(String password) {
-        return password.matches(PASSWORD_PATTERN);
-    }
+   /* private boolean isValidPassword(String password) {
+        return password.matches();
+    }*/
 
     private boolean areFieldsEmpty() {
         return txtPassword.getText().isEmpty() && txtConfirmPassword.getText().isEmpty();

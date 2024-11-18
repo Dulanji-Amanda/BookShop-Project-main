@@ -54,7 +54,7 @@ public class OtpFormController {
 
     private int secondsRemaining = 120;
 
-    private static final String CORRECT_OTP = "1234";
+    private static final String CORRECT_OTP = ForgetPasswordFormController.otpGenerated;
 
     @FXML
     public void initialize() {
@@ -109,7 +109,10 @@ public class OtpFormController {
 
     @FXML
     void submitOtp() {
+        System.out.println(CORRECT_OTP);
+        System.out.println((txtOtp1.getText() + txtOtp2.getText() + txtOtp3.getText() + txtOtp4.getText()));
         if ((txtOtp1.getText() + txtOtp2.getText() + txtOtp3.getText() + txtOtp4.getText()).equals(CORRECT_OTP)) {
+
             loadUI("/view/otpVerifiedForm.fxml");
         } else {
             showErrorMessage("Incorrect OTP. Please try again.");
