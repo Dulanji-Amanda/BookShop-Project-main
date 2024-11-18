@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="Apaneitem" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.ItemFormController">
+<AnchorPane fx:id="Apaneitem" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.ItemFormController">
    <children>
       <Label fx:id="itemidlbl" layoutX="58.0" layoutY="47.0" prefHeight="42.0" prefWidth="113.0" text="Item ID">
          <font>
@@ -34,27 +37,7 @@
       <TextField fx:id="txritem" layoutX="210.0" layoutY="110.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="txtprice" layoutX="210.0" layoutY="171.0" prefHeight="25.0" prefWidth="152.0" />
       <TextField fx:id="txtQty" layoutX="210.0" layoutY="223.0" prefHeight="25.0" prefWidth="105.0" />
-      <Button fx:id="ibtnU" layoutX="56.0" layoutY="312.0" mnemonicParsing="false" onAction="#iupdateOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #d497fb;" text="Update">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="ibtnR" layoutX="781.0" layoutY="312.0" mnemonicParsing="false" onAction="#iResetOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: skyblue;" text="Reset">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="ibtnS" layoutX="544.0" layoutY="312.0" mnemonicParsing="false" onAction="#iSaveOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #51f06b;" text="Save">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="ibtnD" layoutX="296.0" layoutY="311.0" mnemonicParsing="false" onAction="#ideleteOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #f05551;" text="Delete">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <TableView fx:id="itemtbl" layoutX="53.0" layoutY="383.0" onMouseClicked="#ItemMouseOnClicked" prefHeight="260.0" prefWidth="891.0">
+      <TableView fx:id="itemtbl" layoutX="53.0" layoutY="339.0" onMouseClicked="#ItemMouseOnClicked" prefHeight="304.0" prefWidth="891.0">
         <columns>
           <TableColumn fx:id="colCiditrm" prefWidth="165.66665649414062" text="Item ID" />
           <TableColumn fx:id="itemcolname" minWidth="0.0" prefWidth="326.3999786376953" text="Item Name" />
@@ -62,5 +45,56 @@
             <TableColumn fx:id="itemcolprice" prefWidth="255.20001220703125" text="Price" />
         </columns>
       </TableView>
+      <Label fx:id="itemidlbl1" layoutX="683.0" layoutY="48.0" prefHeight="42.0" prefWidth="113.0" text="Order ID">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lblOrderID" layoutX="835.0" layoutY="53.0" prefHeight="38.0" prefWidth="128.0" />
+      <Button fx:id="resetbtn" layoutX="28.0" layoutY="280.0" mnemonicParsing="false" onAction="#resetbtnOnAction" prefHeight="34.0" prefWidth="450.0" style="-fx-background-color: #FF0000;" text="Reset">
+         <font>
+            <Font name="Comic Sans MS Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="addItemBtn" layoutX="505.0" layoutY="280.0" mnemonicParsing="false" onAction="#addItemBtnOnAction" prefHeight="34.0" prefWidth="494.0" style="-fx-background-color: blue;" text="Add Item">
+         <font>
+            <Font name="Comic Sans MS Bold" size="16.0" />
+         </font>
+      </Button>
+      <Button fx:id="placeOrderBtn" layoutX="840.0" layoutY="653.0" mnemonicParsing="false" onAction="#placeOrderBtnOnAction" prefHeight="34.0" prefWidth="163.0" style="-fx-background-color: #FFA24C;" text="Place Order">
+         <font>
+            <Font name="Comic Sans MS Bold" size="16.0" />
+         </font>
+      </Button>
+      <HBox layoutX="30.0" layoutY="650.0" prefHeight="37.0" prefWidth="280.0">
+         <children>
+            <Label prefHeight="32.0" prefWidth="92.0" text="Customer id">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+               <HBox.margin>
+                  <Insets top="5.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="cmbCustomerId" onAction="#cmbCustomerIdOnAction" prefHeight="37.0" prefWidth="162.0" promptText="Select Customer Id" />
+         </children>
+      </HBox>
+      <HBox layoutX="500.0" layoutY="656.0" prefHeight="30.0" prefWidth="315.0">
+         <children>
+            <Label prefHeight="30.0" prefWidth="138.0" text="Total Price(Rs) : ">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="totalPriceLbl" prefHeight="28.0" prefWidth="181.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

@@ -38,4 +38,16 @@ public class CrudUtil { // This class contains utility methods for executing CRU
             // Returns the result of the operation (true if successful, false otherwise), cast to the generic type `T`.
         }
     }
+
+    public static void setAutoCommit(boolean autoCommit) throws SQLException {
+        DBConnection.getInstance().getConnection().setAutoCommit(autoCommit);
+    }
+
+    public static void commit() throws SQLException {
+        DBConnection.getInstance().getConnection().commit();
+    }
+
+    public static void rollback() throws SQLException {
+        DBConnection.getInstance().getConnection().rollback();
+    }
 }

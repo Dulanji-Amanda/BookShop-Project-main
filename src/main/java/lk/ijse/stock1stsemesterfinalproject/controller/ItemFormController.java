@@ -9,15 +9,16 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.stock1stsemesterfinalproject.dto.CustomerDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.ItemDTO;
+import lk.ijse.stock1stsemesterfinalproject.dto.OrderDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.tm.ItemTM;
+import lk.ijse.stock1stsemesterfinalproject.model.CustomerModel;
 import lk.ijse.stock1stsemesterfinalproject.model.ItemModel;
+import lk.ijse.stock1stsemesterfinalproject.model.OrderModel;
 
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class ItemFormController implements Initializable {
@@ -30,18 +31,6 @@ public class ItemFormController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colqtyitem;
-
-    @FXML
-    private Button ibtnD;
-
-    @FXML
-    private Button ibtnR;
-
-    @FXML
-    private Button ibtnS;
-
-    @FXML
-    private Button ibtnU;
 
     @FXML
     private Label iemlblQty;
@@ -62,10 +51,16 @@ public class ItemFormController implements Initializable {
     private Label itemlbprice;
 
     @FXML
+    private Label lblOrderID;
+
+    @FXML
     private TableView<ItemTM> itemtbl;
 
     @FXML
     private Label lblItem;
+
+    @FXML
+    private Label totalPriceLbl;
 
     @FXML
     private TextField txritem;
@@ -76,7 +71,27 @@ public class ItemFormController implements Initializable {
     @FXML
     private TextField txtprice;
 
+    @FXML
+    private Button placeOrderBtn;
+
+    @FXML
+    private Button resetbtn;
+
+    @FXML
+    private Button addItemBtn;
+
+    @FXML
+    private ComboBox<String> cmbCustomerId;
+
     ItemModel itemModel = new ItemModel();
+    OrderModel orderModel = new OrderModel();
+    CustomerModel customerModel = new CustomerModel();
+
+    public int qtyPrice = 0;
+    public double totalPrice = 0;
+
+    private ObservableList<ItemTM> itemList = FXCollections.observableArrayList();
+    private ArrayList<ItemTM> itemListArrayList = new ArrayList<>();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colCiditrm.setCellValueFactory(new PropertyValueFactory<>("Item_Id"));
@@ -84,43 +99,61 @@ public class ItemFormController implements Initializable {
         colqtyitem.setCellValueFactory(new PropertyValueFactory<>("Qty"));
         itemcolprice.setCellValueFactory(new PropertyValueFactory<>("Price"));
 
+        itemtbl.setItems(itemList);
+
         try {
+            String nextItemId = itemModel.getNextItemId();
+            lblItem.setText(nextItemId);
+
+            loadNextOrderId();
+            loadCustomerId();
             refreshPage();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
+    private void loadCustomerId() throws SQLException {
+        ArrayList<String> customerIds = customerModel.getAllCustomerIds();
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        observableList.addAll(customerIds);
+        cmbCustomerId.setItems(observableList);
+    }
+
+    @FXML
+    void cmbCustomerIdOnAction(ActionEvent event) {
+
+    }
+
+    private void loadNextOrderId() throws SQLException {
+        lblOrderID.setText(orderModel.getNextOrderId());
+    }
+
     private void refreshPage() throws SQLException {
         refreshTable();
-
-        String nextItemId = itemModel.getNextItemId();
-        lblItem.setText(nextItemId);
 
         txritem.setText("");
         txtprice.setText("");
         txtQty.setText("");
 
-        ibtnS.setDisable(false);
-
-        ibtnD.setDisable(true);
-        ibtnU.setDisable(true);
+        placeOrderBtn.setDisable(false);
+        resetbtn.setDisable(true);
     }
 
     private void refreshTable() throws SQLException {
-        ArrayList<ItemDTO> itemDTOS = itemModel.getAllItems();
-        ObservableList<ItemTM> itemTMS = FXCollections.observableArrayList();
+        itemList.clear();
+        itemList.addAll(itemListArrayList);
+        calculateQty();
+        calculatePrice();
+    }
 
-        for (ItemDTO itemDTO : itemDTOS) {
-            ItemTM itemTM = new ItemTM(
-                    itemDTO.getItem_Id(),
-                    itemDTO.getItem_Name(),
-                    itemDTO.getQty(),
-                    itemDTO.getPrice()
-            );
-            itemTMS.add(itemTM);
-        }
-        itemtbl.setItems(itemTMS);
+    private void calculatePrice() {
+        double totalPrice = itemList.stream().mapToDouble(ItemTM::getPrice).sum();
+        totalPriceLbl.setText(String.valueOf(totalPrice));
+    }
+
+    private void calculateQty() {
+        qtyPrice = (int) itemList.stream().mapToDouble(ItemTM::getQty).sum();
     }
 
     @FXML
@@ -130,78 +163,77 @@ public class ItemFormController implements Initializable {
             lblItem.setText(selectedItem.getItem_Id());
             txritem.setText(selectedItem.getItem_Name());
             txtprice.setText(selectedItem.getPrice().toString());
-            txtQty.setText(selectedItem.getQty().toString());
+            txtQty.setText(String.valueOf(selectedItem.getQty()));
 
-            ibtnS.setDisable(true);
-
-            ibtnU.setDisable(false);
-            ibtnD.setDisable(false);
+            placeOrderBtn.setDisable(true);
+            resetbtn.setDisable(false);
         }
     }
 
     @FXML
-    void iResetOnAction(ActionEvent event) throws SQLException {
+    void addItemBtnOnAction(ActionEvent event) throws SQLException {
+        String itemId = lblItem.getText();
+        String itemName = txritem.getText();
+        double itemPrice = Double.parseDouble(txtprice.getText());
+        int itemQty = Integer.parseInt(txtQty.getText());
+
+        ItemTM itemTM = new ItemTM(itemId, itemName, itemQty, itemPrice);
+        itemListArrayList.add(itemTM);
+
+        setNextItemId(lblItem.getText());
+
+        refreshTable();
         refreshPage();
     }
 
-    @FXML
-    void iSaveOnAction(ActionEvent event) throws SQLException {
-        String item_id = lblItem.getText();
-        String name = txritem.getText();
-        Double price = Double.valueOf(txtprice.getText());
-        int qty = Integer.parseInt(txtQty.getText());
-
-        if (!lblItem.getText().isEmpty() && !txritem.getText().isEmpty() && !txtQty.getText().isEmpty() && !txtprice.getText().isEmpty()) {
-            ItemDTO itemDTO = new ItemDTO(item_id, name, qty, price);
-
-            boolean isSaved = itemModel.saveItem(itemDTO);
-
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Item saved...!").show();
-                refreshPage();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save item...!").show();
-            }
-        }
+    private void setNextItemId(String text) {
+        String substring = text.substring(1);
+        int i = Integer.parseInt(substring);
+        int newIdIndex = i + 1;
+        lblItem.setText(String.format("I%03d", newIdIndex));
     }
 
     @FXML
-    void ideleteOnAction(ActionEvent event) throws SQLException {
-        String Item_Id = lblItem.getText();
-
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this item?", ButtonType.YES, ButtonType.NO);
-        Optional<ButtonType> buttonType = alert.showAndWait();
-        if (buttonType.get() == ButtonType.YES) {
-
-            boolean isDeleted = itemModel.deleteItem(Item_Id);
-
-            if (isDeleted) {
-                new Alert(Alert.AlertType.INFORMATION, "Item deleted...!").show();
-                refreshPage();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to delete item...!").show();
+    void placeOrderBtnOnAction(ActionEvent event) {
+        if (!cmbCustomerId.getValue().isEmpty()) {
+            ArrayList<ItemDTO> items = new ArrayList<>();
+            for (ItemTM itemTM : itemListArrayList) {
+                items.add(new ItemDTO(itemTM.getItem_Id(), itemTM.getItem_Name(), itemTM.getQty(), itemTM.getPrice()));
             }
+
+            try {
+                String orderId = lblOrderID.getText();
+
+                OrderDTO orderDTO = new OrderDTO();
+                orderDTO.setOrder_Id(orderId);
+                orderDTO.setDescription("");
+                orderDTO.setOrder_qty(qtyPrice);
+                orderDTO.setCust_Id(cmbCustomerId.getValue());
+
+                boolean isOrderSaved = itemModel.saveOrderWithItems(orderDTO, items, totalPrice);
+
+                if (isOrderSaved) {
+                    new Alert(Alert.AlertType.INFORMATION, "Order placed successfully!").show();
+                    itemListArrayList.clear();
+                    refreshTable();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Failed to place order!").show();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Database error!").show();
+            }
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please select the supplier id").show();
         }
 
     }
 
     @FXML
-    void iupdateOnAction(ActionEvent event)throws SQLException {
-        String Item_Id = lblItem.getText();
-        String Item_Name = txritem.getText();
-        int Qty = Integer.parseInt(txtQty.getText());
-        Double Price = Double.valueOf(txtprice.getText());
-
-
-            ItemDTO itemDTO = new ItemDTO(Item_Id, Item_Name, Qty, Price);
-
-            boolean isSaved = itemModel.updateItem(itemDTO);
-
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "Item updated...!").show();
-                refreshPage();
-            } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to update item...!").show();
-            }
+    void resetbtnOnAction(ActionEvent event) throws SQLException {
+        refreshPage();
+        if (!itemListArrayList.isEmpty()) {
+            setNextItemId(itemListArrayList.getLast().getItem_Id());
         }
     }
+}

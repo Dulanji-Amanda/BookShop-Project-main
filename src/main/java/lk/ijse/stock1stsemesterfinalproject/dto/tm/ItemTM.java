@@ -11,6 +11,6 @@ import lombok.*;
 public class ItemTM {
     private String Item_Id;
     private String Item_Name;
-    private Integer Qty;
+    private int Qty;
     private Double Price;
 }

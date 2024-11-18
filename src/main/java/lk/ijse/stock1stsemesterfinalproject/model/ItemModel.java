@@ -1,12 +1,13 @@
 package lk.ijse.stock1stsemesterfinalproject.model;
 
 
-import lk.ijse.stock1stsemesterfinalproject.dto.CustomerDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.ItemDTO;
+import lk.ijse.stock1stsemesterfinalproject.dto.OrderDTO;
 import lk.ijse.stock1stsemesterfinalproject.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ItemModel {
@@ -92,5 +93,56 @@ public class ItemModel {
 
     public void updateItemMinus(String itemId, int qty) throws SQLException {
         CrudUtil.execute("UPDATE item SET Qty = Qty - ? WHERE Item_Id = ?", qty, itemId);
+    }
+
+    public boolean saveOrderWithItems(OrderDTO orderDTO, ArrayList<ItemDTO> items, double totalPrice) throws SQLException {
+        boolean transactionSuccess = false;
+
+        try {
+            CrudUtil.setAutoCommit(false);
+
+            boolean orderSaved = CrudUtil.execute(
+                    "INSERT INTO orders (Order_Id, Description ,Order_Qty , Cust_Id) VALUES (?, ?, ?, ?)",
+                    orderDTO.getOrder_Id(),
+                    orderDTO.getDescription(),
+                    orderDTO.getOrder_qty(),
+                    orderDTO.getCust_Id()
+            );
+
+            boolean itemSaved = true;
+            for (ItemDTO itemDTO : items) {
+                itemSaved = CrudUtil.execute(
+                        "INSERT INTO item (Item_Id, Item_Name, Qty, Price) VALUES (?, ?, ?, ?)",
+                        itemDTO.getItem_Id(),
+                        itemDTO.getItem_Name(),
+                        itemDTO.getQty(),
+                        itemDTO.getPrice()
+                );
+
+                if (itemSaved) {
+                    itemSaved = CrudUtil.execute(
+                            "INSERT INTO order_item_detail (Order_Id, Item_Id, Date, Amount) VALUES (?, ?, ?, ?)",
+                            orderDTO.getOrder_Id(),
+                            itemDTO.getItem_Id(),
+                            LocalDate.now(),
+                            totalPrice
+                            );
+                }
+                if (!itemSaved) break;
+            }
+
+            if (orderSaved && itemSaved) {
+                CrudUtil.commit();
+                transactionSuccess = true;
+            } else {
+                CrudUtil.rollback();
+            }
+        } catch (SQLException e) {
+            CrudUtil.rollback();
+            e.printStackTrace();
+        } finally {
+            CrudUtil.setAutoCommit(true);
+        }
+        return transactionSuccess;
     }
 }
