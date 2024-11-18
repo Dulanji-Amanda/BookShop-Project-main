@@ -240,6 +240,7 @@ public class SupplierFormController implements Initializable {
             }
         }
     }
+
     @FXML
     void SupOnMouseClicked(MouseEvent event) {
         SupplierTM selectedItem = tblSupplier.getSelectionModel().getSelectedItem();

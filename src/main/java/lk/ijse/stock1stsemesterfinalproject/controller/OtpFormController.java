@@ -160,7 +160,6 @@ public class OtpFormController {
         ));
         timeline.play();
     }
-
     private void loadUI(String resource) {
         rootPane.getChildren().clear();
         try {

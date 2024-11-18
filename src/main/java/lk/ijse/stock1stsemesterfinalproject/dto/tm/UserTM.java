@@ -9,6 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 
 public class UserTM {
+
     private String userId;
     private String firstName;
     private String lastName;

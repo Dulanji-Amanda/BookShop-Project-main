@@ -85,7 +85,6 @@ public class StockFormController implements Initializable {
             throw new RuntimeException(e);
         }
     }
-
     private void refreshPage() throws SQLException {
         refreshTable();
 

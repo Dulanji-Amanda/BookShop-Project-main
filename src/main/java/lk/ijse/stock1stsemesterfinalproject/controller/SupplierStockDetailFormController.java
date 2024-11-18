@@ -171,6 +171,5 @@ public class SupplierStockDetailFormController implements Initializable {
 
     @FXML
     void updateOnAction(ActionEvent event) {
-
     }
 }

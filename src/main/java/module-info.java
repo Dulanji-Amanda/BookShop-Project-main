@@ -11,6 +11,7 @@ module lk.ijse.stock1stsemesterfinalproject {
     requires java.desktop;
     requires javax.mail.api;
 
+
     opens lk.ijse.stock1stsemesterfinalproject.dto.tm to javafx.base;
     opens lk.ijse.stock1stsemesterfinalproject.controller to javafx.fxml;
     exports lk.ijse.stock1stsemesterfinalproject;

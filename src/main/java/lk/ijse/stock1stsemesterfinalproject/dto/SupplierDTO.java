@@ -14,4 +14,5 @@ public class SupplierDTO {
     private String Name;
     private Integer Contact;
     private String User_Id;
+
 }

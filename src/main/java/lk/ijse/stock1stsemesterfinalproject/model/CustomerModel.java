@@ -20,7 +20,6 @@ public class CustomerModel {
         }
         return "C001"; // Return the default customer ID if no data is found
     }
-
     public boolean saveCustomer(CustomerDTO customerDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into customer values (?,?,?,?,?)",
