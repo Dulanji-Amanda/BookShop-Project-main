@@ -1,12 +1,13 @@
 package lk.ijse.stock1stsemesterfinalproject.model;
 
 
-import lk.ijse.stock1stsemesterfinalproject.dto.CustomerDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.ItemDTO;
+import lk.ijse.stock1stsemesterfinalproject.dto.OrderDTO;
 import lk.ijse.stock1stsemesterfinalproject.util.CrudUtil;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ItemModel {
@@ -92,5 +93,66 @@ public class ItemModel {
 
     public void updateItemMinus(String itemId, int qty) throws SQLException {
         CrudUtil.execute("UPDATE item SET Qty = Qty - ? WHERE Item_Id = ?", qty, itemId);
+    }
+
+    public boolean saveOrderWithItems(OrderDTO orderDTO, ArrayList<ItemDTO> items, double totalPrice) throws SQLException {
+        boolean transactionSuccess = false;
+
+        try {
+            CrudUtil.setAutoCommit(false);
+
+            boolean orderSaved = CrudUtil.execute(
+                    "INSERT INTO orders (Order_Id, Description, Order_Qty, Cust_Id) VALUES (?, ?, ?, ?)",
+                    orderDTO.getOrder_Id(),
+                    orderDTO.getDescription(),
+                    orderDTO.getOrder_qty(),
+                    orderDTO.getCust_Id()
+            );
+
+            boolean itemUpdated = true;
+            for (ItemDTO itemDTO : items) {
+                itemUpdated = CrudUtil.execute(
+                        "UPDATE item SET Qty = Qty - ? WHERE Item_Id = ?",
+                        itemDTO.getQty(),
+                        itemDTO.getItem_Id()
+                );
+
+                if (itemUpdated) {
+                    itemUpdated = CrudUtil.execute(
+                            "INSERT INTO order_item_detail (Order_Id, Item_Id, Date, Amount) VALUES (?, ?, ?, ?)",
+                            orderDTO.getOrder_Id(),
+                            itemDTO.getItem_Id(),
+                            LocalDate.now(),
+                            totalPrice
+                    );
+                }
+
+                if (!itemUpdated) break;
+            }
+
+            PaymentModel paymentModel = new PaymentModel();
+            boolean paymentSaved = CrudUtil.execute(
+                    "INSERT INTO payment (Payment_Id, Amount, Contact, Payment_Date, Order_Id) VALUES (?, ?, ?, ?, ?)",
+                    paymentModel.getNextPaymentId(),
+                    totalPrice,
+                    11111111,
+                    LocalDate.now(),
+                    orderDTO.getOrder_Id()
+            );
+
+            // Commit or rollback transaction based on success
+            if (orderSaved && itemUpdated && paymentSaved) {
+                CrudUtil.commit();
+                transactionSuccess = true;
+            } else {
+                CrudUtil.rollback();
+            }
+        } catch (SQLException e) {
+            CrudUtil.rollback();
+            e.printStackTrace();
+        } finally {
+            CrudUtil.setAutoCommit(true);
+        }
+        return transactionSuccess;
     }
 }

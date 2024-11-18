@@ -52,20 +52,17 @@ public class OrderModel {
     // Method to update an order
     public boolean updateOrder(OrderDTO orderDTO) throws SQLException {
         return CrudUtil.execute(
-                "update orders set Description=?, Order_qty=?, Cust_Id=? where Order_Id=?",
+                "update orders set Description=?, Cust_Id=? where Order_Id=?",
                 orderDTO.getDescription(),
-                orderDTO.getOrder_qty(),
                 orderDTO.getCust_Id(),
                 orderDTO.getOrder_Id()
         );
     }
 
-    // Method to delete an order by Order ID
     public boolean deleteOrder(String order_id) throws SQLException {
         return CrudUtil.execute("delete from orders where Order_Id=?", order_id);
     }
 
-    // Method to get all Order IDs (if required)
     public ArrayList<String> getAllOrderIds() throws SQLException {
         ResultSet rst = CrudUtil.execute("select Order_Id from orders");
 

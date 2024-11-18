@@ -61,6 +61,8 @@ public class LoginFormController {
 
     private boolean isPasswordVisible = false;
 
+    public static String userId = "";
+
     @FXML
     public void initialize() {
 
@@ -113,6 +115,7 @@ public class LoginFormController {
 
         for (UserDTO user : allUsers) {
             if (user.getUsername().equals(txtUsername.getText()) && user.getPassword().equals(txtPassword.getText())) {
+                userId = user.getUserId();
                 return true;
             }
         }

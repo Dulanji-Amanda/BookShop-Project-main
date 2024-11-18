@@ -32,16 +32,6 @@ create table employee(
 );
 
 
-
-create table Salary(
-                       Salary_Id varchar (10) primary key,
-                       Date date,
-                       Amount decimal (10,2),
-                       Emp_Id varchar(10),
-                       FOREIGN KEY(Emp_Id) REFERENCES employee(Emp_Id)
-                           ON UPDATE CASCADE ON DELETE CASCADE
-);
-
 create table customer(
                          Cust_Id varchar(10) primary key,
                          Cust_Name varchar(50),
