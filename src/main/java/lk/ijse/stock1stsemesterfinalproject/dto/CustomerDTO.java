@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
 public class CustomerDTO {
     private String Cust_Id;
     private String Cust_Name;

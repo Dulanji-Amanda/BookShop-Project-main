@@ -55,6 +55,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
+
       <TableView fx:id="emptbl" onMouseClicked="#onClickedTableEmp" layoutX="53.0" layoutY="331.0" prefHeight="312.0" prefWidth="891.0">
         <columns>
           <TableColumn fx:id="empcolCid" prefWidth="122.33332824707031" text="Employee ID" />

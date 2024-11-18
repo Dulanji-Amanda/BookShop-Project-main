@@ -11,6 +11,7 @@ import lombok.*;
 @NoArgsConstructor
 
 public class PaymentTM {
+
     private String paymentId;
     private double amount;
     private int contact;

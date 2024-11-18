@@ -181,7 +181,6 @@ public class AddItemFormController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Fail to delete item...!").show();
             }
         }
-
     }
 
     @FXML

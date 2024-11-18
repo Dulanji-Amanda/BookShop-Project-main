@@ -94,7 +94,6 @@ public class RegisterSecondFormController {
             }
         }
     }
-
     private boolean areFieldsEmpty() {
         return txtPassword.getText().isEmpty() || txtConfirmPassword.getText().isEmpty() || txtUsername.getText().isEmpty();
     }

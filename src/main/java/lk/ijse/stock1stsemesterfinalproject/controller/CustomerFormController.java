@@ -271,7 +271,6 @@ public class CustomerFormController implements Initializable {
             }
         }
     }
-
     @FXML
     void updateOnAction(ActionEvent event) throws SQLException {
         String Cust_Id = lbl.getText();

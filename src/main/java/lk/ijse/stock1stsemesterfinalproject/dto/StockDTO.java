@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 
+
 public class StockDTO {
 
     private String Stock_Id;

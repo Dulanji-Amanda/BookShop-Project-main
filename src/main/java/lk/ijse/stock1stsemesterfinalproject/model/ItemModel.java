@@ -23,7 +23,6 @@ public class ItemModel {
         }
         return "I001";
     }
-
     public boolean saveItem(ItemDTO itemDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into item values (?,?,?,?)",

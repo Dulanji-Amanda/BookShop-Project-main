@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="Apane" prefHeight="700.0" prefWidth="1017.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.WelcomeShopController">
+
    <children>
       <ImageView fitHeight="640.0" fitWidth="680.0" layoutX="166.0" layoutY="33.0" pickOnBounds="true" preserveRatio="true">
          <image>

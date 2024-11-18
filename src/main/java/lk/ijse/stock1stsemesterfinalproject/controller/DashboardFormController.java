@@ -75,8 +75,6 @@ public class DashboardFormController implements Initializable {
     @FXML
     private VBox vb2;
 
-
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         navigateTo("/view/welcomeShop.fxml");

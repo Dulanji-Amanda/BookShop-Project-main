@@ -82,6 +82,7 @@ public class StockModel {
                     rst.getString(3) // user id
             );
         }
+
         return null;
     }
 }

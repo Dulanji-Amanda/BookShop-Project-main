@@ -137,6 +137,7 @@
                            <HBox.margin>
                               <Insets left="140.0" top="15.0" />
                            </HBox.margin>
+
                            <image>
                               <Image url="@../assets/img/home.png" />
                            </image>

@@ -14,6 +14,7 @@ public class AppInitializer extends Application {
         launch(args);
     }
 
+
     @Override
     public void start(Stage stage) throws Exception {
         stage.setTitle("STOCK VERSE");

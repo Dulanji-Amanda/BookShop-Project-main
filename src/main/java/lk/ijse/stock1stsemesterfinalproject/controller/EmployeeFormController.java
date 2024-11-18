@@ -270,5 +270,4 @@ public class EmployeeFormController implements Initializable {
             UserDTO userDTO = userModel.findById(selectedUserId);
         }
     }
-
 }

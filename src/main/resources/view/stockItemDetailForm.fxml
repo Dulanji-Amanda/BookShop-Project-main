@@ -8,6 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="ApaneStockItemDetail" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.StockItemDetailFormController">
+
    <children>
       <Label fx:id="lblSID" layoutX="176.0" layoutY="78.0" prefHeight="38.0" prefWidth="128.0" />
       <Button fx:id="btnUStockItemDetail" layoutX="56.0" layoutY="312.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #d497fb;" text="Update">

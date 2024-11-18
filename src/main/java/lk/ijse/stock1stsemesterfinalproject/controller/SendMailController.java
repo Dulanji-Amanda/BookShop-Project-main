@@ -26,6 +26,7 @@ public class SendMailController {
             }
         });
 
+
         try {
             // Compose the message
             Message message = new MimeMessage(session);

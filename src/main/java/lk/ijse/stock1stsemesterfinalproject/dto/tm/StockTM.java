@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 
 public class StockTM {
-
     private String Stock_Id;
     private String Name;
     private String User_Id;

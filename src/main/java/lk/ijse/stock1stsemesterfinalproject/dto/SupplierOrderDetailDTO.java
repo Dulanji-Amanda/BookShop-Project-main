@@ -9,6 +9,7 @@ import java.time.LocalDate;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class SupplierOrderDetailDTO {
     private LocalDate Date;
     private String Stock_Id;

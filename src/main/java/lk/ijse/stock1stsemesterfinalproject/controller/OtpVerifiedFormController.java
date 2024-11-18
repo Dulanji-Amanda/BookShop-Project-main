@@ -150,6 +150,7 @@ public class OtpVerifiedFormController {
         timeline.play();
     }
 
+
     private void loadUI(String resource) {
         rootPane.getChildren().clear();
         try {

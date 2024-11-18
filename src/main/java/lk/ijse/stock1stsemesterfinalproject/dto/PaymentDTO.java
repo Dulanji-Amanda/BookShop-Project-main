@@ -11,6 +11,7 @@ import java.util.Date;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+
 public class PaymentDTO {
     private String paymentId;
     private double amount;

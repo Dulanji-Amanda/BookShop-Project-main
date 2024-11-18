@@ -77,7 +77,6 @@ public class ForgetPasswordFormController {
         return String.valueOf(otp);
     }
 
-
     private boolean isValidEmailAddress() throws SQLException {
         return userModel.isEmailExists(txtEmail.getText());
     }

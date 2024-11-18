@@ -17,6 +17,7 @@
             <Image url="@../assets/img/loginPage.png" />
          </image>
       </ImageView>
+
       <Label fx:id="lblLogin" layoutX="146.0" layoutY="175.0" opacity="0.9" styleClass="txtWelcome" stylesheets="@../style/Styles.css" text="OTP Verified">
          <font>
             <Font name="System Bold" size="47.0" />

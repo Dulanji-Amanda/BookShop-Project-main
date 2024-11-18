@@ -71,5 +71,4 @@ public class StockItemDetailFormController {
     void updateOnAction(ActionEvent event) {
 
     }
-
 }

@@ -20,7 +20,6 @@ import java.util.Objects;
 
 public class RegisterFormController {
 
-
     @FXML
     private ImageView img;
 

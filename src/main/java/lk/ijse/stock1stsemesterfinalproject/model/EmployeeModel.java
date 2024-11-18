@@ -20,7 +20,6 @@ public class EmployeeModel {
         }
         return "E001"; // Return the default employee ID if no data is found
     }
-
     public boolean saveEmployee(EmployeeDTO employeeDTO) throws SQLException {
         return CrudUtil.execute(
                 "insert into employee values (?,?,?,?)",

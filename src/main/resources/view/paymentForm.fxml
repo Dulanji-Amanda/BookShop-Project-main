@@ -55,5 +55,6 @@
           <TableColumn fx:id="colOidPaymnt" minWidth="0.0" prefWidth="164.00006103515625" text="Order ID" />
         </columns>
       </TableView>
+
    </children>
 </AnchorPane>

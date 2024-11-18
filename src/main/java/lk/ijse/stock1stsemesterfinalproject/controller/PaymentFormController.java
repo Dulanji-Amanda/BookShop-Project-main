@@ -166,7 +166,6 @@ public class PaymentFormController implements Initializable {
             txtcontactPayment.setText(String.valueOf(selectedItem.getContact()));
             txtPaymentDate.setText(String.valueOf(selectedItem.getPaymentDate()));
             combouIDPayment.setValue(selectedItem.getOrderId());
-
         }
     }
 }

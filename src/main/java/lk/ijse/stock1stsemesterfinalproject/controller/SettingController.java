@@ -114,7 +114,6 @@ public class SettingController implements Initializable {
                 passwordtxt.setText(userDTO.getPassword());
             }
         }
-
     }
 
     @FXML

@@ -220,7 +220,6 @@ public class OrdersFormController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Failed to update order...!").show();
         }
     }
-
     @FXML
     void custIdComboOrderOnAction(ActionEvent event) throws SQLException {
         String selectCustomerIds = String.valueOf(custIdComboOrder.getSelectionModel().getSelectedItem());

@@ -130,7 +130,6 @@ public class LoginFormController {
             throw new RuntimeException(e);
         }
     }
-
     private void showErrorMessage(String message) {
         lblError.setText(message);
         lblError.setStyle("-fx-text-fill: red; -fx-font-size: 14px;");
