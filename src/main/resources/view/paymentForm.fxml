@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ApanePayment" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.PaymentFormController">
+<AnchorPane fx:id="ApanePayment" prefHeight="700.0" prefWidth="1017.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.stock1stsemesterfinalproject.controller.PaymentFormController">
    <children>
       <Label fx:id="lblPayment" layoutX="58.0" layoutY="47.0" prefHeight="42.0" prefWidth="113.0" text="Payment ID">
          <font>
@@ -40,7 +40,7 @@
       <TextField fx:id="txtPaymentDate" layoutX="210.0" layoutY="110.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="txtAmountPayment" layoutX="210.0" layoutY="171.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="txtcontactPayment" layoutX="210.0" layoutY="223.0" prefHeight="25.0" prefWidth="304.0" />
-      <ComboBox fx:id="combouIDPayment" layoutX="731.0" layoutY="56.0" onAction="#combouIDPaymentOnAction" prefWidth="150.0" />
+      <ComboBox fx:id="combouIDPayment" layoutX="731.0" layoutY="56.0" onAction="#combouIDPaymentOnAction" prefWidth="150.0" promptText="select order Id" />
       <Button fx:id="btnRPayment" layoutX="725.0" layoutY="204.0" mnemonicParsing="false" onAction="#ResetOnActionPayment" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: skyblue;" text="Reset">
          <font>
             <Font name="System Bold" size="14.0" />

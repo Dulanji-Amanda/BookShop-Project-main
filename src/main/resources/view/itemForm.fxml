@@ -78,14 +78,14 @@
             <ComboBox fx:id="cmbCustomerId" onAction="#cmbCustomerIdOnAction" prefHeight="37.0" prefWidth="162.0" promptText="Select Customer Id" />
          </children>
       </HBox>
-      <HBox layoutX="500.0" layoutY="656.0" prefHeight="30.0" prefWidth="315.0">
+      <HBox layoutX="590.0" layoutY="656.0" prefHeight="30.0" prefWidth="225.0">
          <children>
-            <Label prefHeight="30.0" prefWidth="138.0" text="Total Price(Rs) : ">
+            <Label prefHeight="30.0" prefWidth="210.0" text="Total Price(Rs) : ">
                <font>
                   <Font size="15.0" />
                </font>
             </Label>
-            <Label fx:id="totalPriceLbl" prefHeight="28.0" prefWidth="181.0">
+            <Label fx:id="totalPriceLbl" prefHeight="28.0" prefWidth="175.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -115,5 +115,11 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label layoutX="291.0" layoutY="649.0" prefHeight="42.0" prefWidth="92.0" text="Description">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtItemDescription" layoutX="390.0" layoutY="646.0" prefHeight="39.0" prefWidth="176.0" />
    </children>
 </AnchorPane>

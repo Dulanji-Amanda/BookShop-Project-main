@@ -34,7 +34,7 @@
       <Label fx:id="emplbl" layoutX="210.0" layoutY="52.0" prefHeight="38.0" prefWidth="128.0" />
       <TextField fx:id="txtempname" layoutX="210.0" layoutY="110.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="emptxtcontact" layoutX="210.0" layoutY="172.0" prefHeight="25.0" prefWidth="213.0" />
-      <ComboBox fx:id="empcombouID" layoutX="731.0" layoutY="56.0" onAction="#comboUidEmpOnAction" onMouseClicked="#onClickedTableEmp" prefWidth="150.0" />
+      <ComboBox fx:id="empcombouID" layoutX="731.0" layoutY="56.0" onAction="#comboUidEmpOnAction" onMouseClicked="#onClickedTableEmp" prefWidth="150.0" promptText="select user Id" />
       <Button fx:id="empbtnU" layoutX="58.0" layoutY="264.0" mnemonicParsing="false" onAction="#empupdateOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #d497fb;" text="Update">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -56,7 +56,7 @@
          </font>
       </Button>
 
-      <TableView fx:id="emptbl" onMouseClicked="#onClickedTableEmp" layoutX="53.0" layoutY="331.0" prefHeight="312.0" prefWidth="891.0">
+      <TableView fx:id="emptbl" layoutX="53.0" layoutY="331.0" onMouseClicked="#onClickedTableEmp" prefHeight="312.0" prefWidth="891.0">
         <columns>
           <TableColumn fx:id="empcolCid" prefWidth="122.33332824707031" text="Employee ID" />
             <TableColumn fx:id="empcolName" prefWidth="424.6666564941406" text="Employee Name" />

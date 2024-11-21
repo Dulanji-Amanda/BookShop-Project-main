@@ -9,15 +9,20 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.stock1stsemesterfinalproject.dto.ItemDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.StockDTO;
+import lk.ijse.stock1stsemesterfinalproject.dto.SupplierDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.UserDTO;
 import lk.ijse.stock1stsemesterfinalproject.dto.tm.StockTM;
 import lk.ijse.stock1stsemesterfinalproject.dto.tm.UserTM;
+import lk.ijse.stock1stsemesterfinalproject.model.ItemModel;
 import lk.ijse.stock1stsemesterfinalproject.model.StockModel;
+import lk.ijse.stock1stsemesterfinalproject.model.SupplierModel;
 import lk.ijse.stock1stsemesterfinalproject.model.UserModel;
 
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -29,6 +34,9 @@ public class StockFormController implements Initializable {
 
     @FXML
     private Label StockIdlbl;
+
+    @FXML
+    private Label dateLbl;
 
     @FXML
     private Label StockUId;
@@ -58,10 +66,19 @@ public class StockFormController implements Initializable {
     private ComboBox<String> combouIDStock;
 
     @FXML
+    private ComboBox<String> cmbSupplierId;
+
+    @FXML
+    private ComboBox<String> cmbItemIds;
+
+    @FXML
     private Label lblStock;
 
     @FXML
     private Label lblnameStock;
+
+    @FXML
+    private TextField lblQty;
 
     @FXML
     private TableView<StockTM> tblStock;
@@ -70,8 +87,11 @@ public class StockFormController implements Initializable {
     private TextField txtstockname;
 
     StockModel stockModel = new StockModel();
-
     UserModel userModel = new UserModel();
+    ItemModel itemModel = new ItemModel();
+    ItemDTO itemDTO = new ItemDTO();
+    SupplierDTO supplierDTO = new SupplierDTO();
+    SupplierModel supplierModel = new SupplierModel();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         colStockid.setCellValueFactory(new PropertyValueFactory<>("Stock_Id"));
@@ -80,16 +100,20 @@ public class StockFormController implements Initializable {
 
         try {
             loadUserIds();
+            loadSupplierIds();
+            loadItemIds();
             refreshPage();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
     private void refreshPage() throws SQLException {
         refreshTable();
 
        String nextStockId = stockModel.getNextStockId();
        lblStock.setText(nextStockId);
+       dateLbl.setText(String.valueOf(LocalDate.now()));
 
         txtstockname.setText("");
 
@@ -118,6 +142,10 @@ public class StockFormController implements Initializable {
     void ResetOnActionStock(ActionEvent event) throws SQLException {
         combouIDStock.setValue(null);
         combouIDStock.setPromptText("Select User_Id");
+        cmbSupplierId.setValue(null);
+        cmbSupplierId.setPromptText("Select Supplier_Id");
+        cmbItemIds.setValue(null);
+        cmbItemIds.setPromptText("Select Item_Id");
         refreshPage();
     }
 
@@ -127,35 +155,33 @@ public class StockFormController implements Initializable {
         String Name = txtstockname.getText();
         String User_Id =combouIDStock.getValue();
 
-        // Define regex patterns for validation
         String namePattern = "^[A-Za-z ]+$";
 
-//        Validate each field using regex patterns
         boolean isValidName = Name.matches(namePattern);
 
-
-        // Reset input field styles
         txtstockname.setStyle(txtstockname.getStyle() + ";-fx-border-color:  #091057;");
-
-        // Highlight invalid fields in red
 
         if (!isValidName) {
             txtstockname.setStyle(txtstockname.getStyle() + ";-fx-border-color: red;");
         }
 
+        if (isValidName && !lblQty.getText().isEmpty()) {
+            if (combouIDStock.getValue() != null && cmbSupplierId.getValue() != null && cmbItemIds.getValue() != null) {
+                StockDTO stockDTO = new StockDTO(Stock_Id,Name, User_Id);
 
-        // Save stock if all fields are valid
-        if (isValidName) {
-            StockDTO stockDTO = new StockDTO(Stock_Id,Name, User_Id);
+                boolean isSaved = stockModel.saveStock(stockDTO, itemDTO, supplierDTO, lblQty.getText());
 
-            boolean isSaved = stockModel.saveStock(stockDTO);
-
-            if (isSaved) {
-                new Alert(Alert.AlertType.INFORMATION, "CStock saved...!").show();
-                refreshPage();
+                if (isSaved) {
+                    new Alert(Alert.AlertType.INFORMATION, "CStock saved...!").show();
+                    refreshPage();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Fail to save stock...!").show();
+                }
             } else {
-                new Alert(Alert.AlertType.ERROR, "Fail to save stock...!").show();
+                new Alert(Alert.AlertType.ERROR, "Please fill the fields").show();
             }
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Please fill the fields").show();
         }
     }
     @FXML
@@ -183,26 +209,20 @@ public class StockFormController implements Initializable {
         String Name = txtstockname.getText();
         String User_Id = combouIDStock.getValue();
 
-        // Define regex patterns for validation
         String namePattern = "^[A-Za-z ]+$";
 
-//        Validate each field using regex patterns
         boolean isValidName = Name.matches(namePattern);
 
-        // Reset input field styles
         txtstockname.setStyle(txtstockname.getStyle() + ";-fx-border-color:  #091057;");
-
-        // Highlight invalid fields in red
 
         if (!isValidName) {
             txtstockname.setStyle(txtstockname.getStyle() + ";-fx-border-color: red;");
         }
 
-        // Save stock if all fields are valid
         if (isValidName ) {
             StockDTO stockDTO = new StockDTO(Stock_Id, Name, User_Id);
 
-            boolean isSaved = stockModel.updateStock(stockDTO);
+            boolean isSaved = stockModel.updateStock(stockDTO, itemDTO, supplierDTO);
 
             if (isSaved) {
                 new Alert(Alert.AlertType.INFORMATION, "Stock updated...!").show();
@@ -235,11 +255,41 @@ public class StockFormController implements Initializable {
         combouIDStock.setItems(observableList);
     }
 
+    private void loadItemIds() throws SQLException {
+        ArrayList<String> itemIds = itemModel.getAllItemIds();
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        observableList.addAll(itemIds);
+        cmbItemIds.setItems(observableList);
+    }
+
+    private void loadSupplierIds() throws SQLException {
+        ArrayList<String> supplierIds = supplierModel.getAllSupplierIds();
+        ObservableList<String> observableList = FXCollections.observableArrayList();
+        observableList.addAll(supplierIds);
+        cmbSupplierId.setItems(observableList);
+    }
+
     @FXML
     void StockComboOnAction(ActionEvent event) throws SQLException {
         String selectedUserId = combouIDStock.getSelectionModel().getSelectedItem();
         if (selectedUserId != null) {
             UserDTO userDTO = userModel.findById(selectedUserId);
+        }
+    }
+
+    @FXML
+    void cmbItemIdsOnAction(ActionEvent event) throws SQLException {
+        String selectedItemId = cmbItemIds.getSelectionModel().getSelectedItem();
+        if (selectedItemId != null) {
+            itemDTO = itemModel.findById(selectedItemId);
+        }
+    }
+
+    @FXML
+    void cmbSupplierIdOnAction(ActionEvent event) throws SQLException {
+        String selectedSupplierId = cmbSupplierId.getSelectionModel().getSelectedItem();
+        if (selectedSupplierId != null) {
+            supplierDTO = supplierModel.findById(selectedSupplierId);
         }
     }
 }

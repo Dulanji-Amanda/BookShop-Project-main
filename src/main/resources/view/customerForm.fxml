@@ -41,7 +41,7 @@
       <TextField fx:id="txtcustname" layoutX="210.0" layoutY="110.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="txtaddress" layoutX="210.0" layoutY="171.0" prefHeight="25.0" prefWidth="304.0" />
       <TextField fx:id="txtcontact" layoutX="210.0" layoutY="223.0" prefHeight="25.0" prefWidth="304.0" />
-      <ComboBox fx:id="combouID" layoutX="731.0" layoutY="56.0" onAction="#combouIDOnAction" prefWidth="150.0" />
+      <ComboBox fx:id="combouID" layoutX="731.0" layoutY="56.0" onAction="#combouIDOnAction" prefWidth="150.0" promptText="select user Id" />
       <Button fx:id="btnU" layoutX="56.0" layoutY="312.0" mnemonicParsing="false" onAction="#updateOnAction" prefHeight="38.0" prefWidth="161.0" style="-fx-background-color: #d497fb;" text="Update">
          <font>
             <Font name="System Bold" size="14.0" />

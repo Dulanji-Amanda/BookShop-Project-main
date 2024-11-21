@@ -69,6 +69,9 @@ public class ItemFormController implements Initializable {
     private TextField txtQty;
 
     @FXML
+    private TextField txtItemDescription;
+
+    @FXML
     private Button placeOrderBtn;
 
     @FXML
@@ -90,7 +93,6 @@ public class ItemFormController implements Initializable {
         itemcolprice.setCellValueFactory(new PropertyValueFactory<>("Price"));
 
         itemtbl.setItems(itemList);
-
         try {
             loadNextOrderId();
             loadCustomerId();
@@ -214,7 +216,7 @@ public class ItemFormController implements Initializable {
             String orderId = lblOrderID.getText();
             OrderDTO orderDTO = new OrderDTO(orderId, "", items.size(), cmbCustomerId.getValue());
 
-            boolean isOrderSaved = itemModel.saveOrderWithItems(orderDTO, items, totalPrice);
+            boolean isOrderSaved = itemModel.saveOrderWithItems(orderDTO, items, totalPrice, txtItemDescription.getText());
 
             if (isOrderSaved) {
                 showAlert(Alert.AlertType.INFORMATION, "Success", "Order placed successfully!");

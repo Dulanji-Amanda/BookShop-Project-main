@@ -81,10 +81,10 @@ public class ItemModel {
 
         if (rst.next()) {
             return new ItemDTO(
-                    rst.getString(1),  // customer ID
-                    rst.getString(2),  // Name
-                    rst.getInt(3),  // Contact
-                    rst.getDouble(4)  // Contact
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getInt(3),
+                    rst.getDouble(4)
             );
         }
         return null;
@@ -94,7 +94,7 @@ public class ItemModel {
         CrudUtil.execute("UPDATE item SET Qty = Qty - ? WHERE Item_Id = ?", qty, itemId);
     }
 
-    public boolean saveOrderWithItems(OrderDTO orderDTO, ArrayList<ItemDTO> items, double totalPrice) throws SQLException {
+    public boolean saveOrderWithItems(OrderDTO orderDTO, ArrayList<ItemDTO> items, double totalPrice, String text) throws SQLException {
         boolean transactionSuccess = false;
 
         try {
@@ -103,12 +103,13 @@ public class ItemModel {
             boolean orderSaved = CrudUtil.execute(
                     "INSERT INTO orders (Order_Id, Description, Order_Qty, Cust_Id) VALUES (?, ?, ?, ?)",
                     orderDTO.getOrder_Id(),
-                    orderDTO.getDescription(),
+                    text,
                     orderDTO.getOrder_qty(),
                     orderDTO.getCust_Id()
             );
 
             boolean itemUpdated = true;
+            CustomerModel customerModel = new CustomerModel();
             for (ItemDTO itemDTO : items) {
                 itemUpdated = CrudUtil.execute(
                         "UPDATE item SET Qty = Qty - ? WHERE Item_Id = ?",
@@ -134,12 +135,11 @@ public class ItemModel {
                     "INSERT INTO payment (Payment_Id, Amount, Contact, Payment_Date, Order_Id) VALUES (?, ?, ?, ?, ?)",
                     paymentModel.getNextPaymentId(),
                     totalPrice,
-                    11111111,
+                    customerModel.findById(orderDTO.getCust_Id()).getContact(),
                     LocalDate.now(),
                     orderDTO.getOrder_Id()
             );
 
-            // Commit or rollback transaction based on success
             if (orderSaved && itemUpdated && paymentSaved) {
                 CrudUtil.commit();
                 transactionSuccess = true;

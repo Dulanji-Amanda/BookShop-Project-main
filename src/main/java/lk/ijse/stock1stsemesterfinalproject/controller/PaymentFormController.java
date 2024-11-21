@@ -93,10 +93,14 @@ public class PaymentFormController implements Initializable {
         colpaymentId.setCellValueFactory(new PropertyValueFactory<>("paymentId"));
         colAmountPayment.setCellValueFactory(new PropertyValueFactory<>("Amount"));
         colcontactPayment.setCellValueFactory(new PropertyValueFactory<>("Contact"));
-        colPaymentDate.setCellValueFactory(new PropertyValueFactory<>("Date"));
+        colPaymentDate.setCellValueFactory(new PropertyValueFactory<>("paymentDate"));
         colOidPaymnt.setCellValueFactory(new PropertyValueFactory<>("orderId"));
 
+        txtPaymentDate.setEditable(false);
+        txtAmountPayment.setEditable(false);
+        txtcontactPayment.setEditable(false);
 
+        combouIDPayment.setEditable(false);
         try {
             loadOrderIds();
             refreshPage();
